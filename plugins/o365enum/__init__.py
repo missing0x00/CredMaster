@@ -4,10 +4,18 @@ requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.
 
 
 def validate(pluginargs, args):
-    pluginargs = {
-        'url' : "https://login.microsoftonline.com",
-        'userenum' : True
-    }
+    #
+    # Plugin Args
+    #
+    # --url https://login.microsoftonline.us  ->  Target Azure National Cloud [OPTIONAL]
+    #
+    # Reference: https://learn.microsoft.com/en-us/entra/identity-platform/authentication-national-cloud
+    #
+    pluginargs['userenum'] = True
+
+    if 'url' not in pluginargs.keys():
+        pluginargs['url'] = "https://login.microsoftonline.com"
+
     return True, None, pluginargs
 
 
